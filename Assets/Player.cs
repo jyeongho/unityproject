@@ -11,6 +11,7 @@ public class Player : MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
     void FixedUpdate()
