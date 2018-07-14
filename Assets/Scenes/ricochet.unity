@@ -649,7 +649,7 @@ GameObject:
   - component: {fileID: 98996951}
   - component: {fileID: 98996955}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Yellow_Cylinder (0)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1077,7 +1077,7 @@ GameObject:
   - component: {fileID: 232321303}
   - component: {fileID: 232321307}
   m_Layer: 0
-  m_Name: Cylinder (7)
+  m_Name: Blue_Cylinder (7)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1738,7 +1738,7 @@ GameObject:
   - component: {fileID: 338045426}
   - component: {fileID: 338045430}
   m_Layer: 0
-  m_Name: Cylinder (2)
+  m_Name: Green_Cylinder (2)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1933,7 +1933,7 @@ GameObject:
   - component: {fileID: 492715104}
   - component: {fileID: 492715108}
   m_Layer: 0
-  m_Name: Cylinder (4)
+  m_Name: Blue_Cylinder (4)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2523,7 +2523,7 @@ GameObject:
   - component: {fileID: 649658451}
   - component: {fileID: 649658455}
   m_Layer: 0
-  m_Name: Cylinder (17)
+  m_Name: Red_Cylinder (16)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2595,7 +2595,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.01, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1690340428}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &649658455
 MonoBehaviour:
@@ -2688,7 +2688,7 @@ GameObject:
   - component: {fileID: 667146321}
   - component: {fileID: 667146325}
   m_Layer: 0
-  m_Name: Cylinder (14)
+  m_Name: Blue_Cylinder (13)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2760,7 +2760,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.01, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1690340428}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &667146325
 MonoBehaviour:
@@ -3041,104 +3041,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df85b0de9c55e7b4ca2df35c04fc4e57, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &787453352
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 787453356}
-  - component: {fileID: 787453355}
-  - component: {fileID: 787453354}
-  - component: {fileID: 787453353}
-  - component: {fileID: 787453357}
-  m_Layer: 0
-  m_Name: Cylinder (12)
-  m_TagString: TokenTag
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!136 &787453353
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 787453352}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!23 &787453354
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 787453352}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
---- !u!33 &787453355
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 787453352}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &787453356
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 787453352}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.49, y: 0.5, z: -6.55}
-  m_LocalScale: {x: 0.5, y: 0.01, z: 0.5}
-  m_Children: []
-  m_Father: {fileID: 1690340428}
-  m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &787453357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 787453352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2044ec1093b45f4e9b6c02e75dbbb42, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &798782497
 GameObject:
   m_ObjectHideFlags: 0
@@ -3239,7 +3141,7 @@ GameObject:
   - component: {fileID: 806241987}
   - component: {fileID: 806241991}
   m_Layer: 0
-  m_Name: Cylinder (8)
+  m_Name: Green_Cylinder (8)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3529,7 +3431,7 @@ GameObject:
   - component: {fileID: 876333091}
   - component: {fileID: 876333095}
   m_Layer: 0
-  m_Name: Cylinder (15)
+  m_Name: Green_Cylinder (14)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3601,7 +3503,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.01, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1690340428}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &876333095
 MonoBehaviour:
@@ -3851,7 +3753,7 @@ GameObject:
   - component: {fileID: 1053478619}
   - component: {fileID: 1053478623}
   m_Layer: 0
-  m_Name: Cylinder (16)
+  m_Name: Yellow_Cylinder (15)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3923,7 +3825,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.01, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1690340428}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1053478623
 MonoBehaviour:
@@ -4415,7 +4317,7 @@ GameObject:
   - component: {fileID: 1157571216}
   - component: {fileID: 1157571220}
   m_Layer: 0
-  m_Name: Cylinder (11)
+  m_Name: Yellow_Cylinder (11)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4693,7 +4595,7 @@ GameObject:
   - component: {fileID: 1186676668}
   - component: {fileID: 1186676672}
   m_Layer: 0
-  m_Name: Cylinder (13)
+  m_Name: Red_Cylinder (12)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4765,7 +4667,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.01, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1690340428}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1186676672
 MonoBehaviour:
@@ -4933,7 +4835,7 @@ GameObject:
   - component: {fileID: 1270942743}
   - component: {fileID: 1270942747}
   m_Layer: 0
-  m_Name: Cylinder (6)
+  m_Name: Blue_Cylinder (6)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5575,7 +5477,7 @@ GameObject:
   - component: {fileID: 1472474788}
   - component: {fileID: 1472474792}
   m_Layer: 0
-  m_Name: Cylinder (3)
+  m_Name: Green_Cylinder (3)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6330,7 +6232,7 @@ GameObject:
   - component: {fileID: 1596217648}
   - component: {fileID: 1596217652}
   m_Layer: 0
-  m_Name: Cylinder (5)
+  m_Name: Yellow_Cylinder (5)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6518,7 +6420,7 @@ GameObject:
   - component: {fileID: 1654574573}
   - component: {fileID: 1654574577}
   m_Layer: 0
-  m_Name: Cylinder (9)
+  m_Name: Everything_Cylinder (9)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6640,7 +6542,6 @@ Transform:
   - {fileID: 1654574576}
   - {fileID: 2101830428}
   - {fileID: 1157571219}
-  - {fileID: 787453356}
   - {fileID: 1186676671}
   - {fileID: 667146324}
   - {fileID: 876333094}
@@ -6884,7 +6785,7 @@ GameObject:
   - component: {fileID: 1773598588}
   - component: {fileID: 1773598592}
   m_Layer: 0
-  m_Name: Cylinder (1)
+  m_Name: Red_Cylinder (1)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7697,7 +7598,7 @@ GameObject:
   - component: {fileID: 2101830425}
   - component: {fileID: 2101830429}
   m_Layer: 0
-  m_Name: Cylinder (10)
+  m_Name: Red_Cylinder (10)
   m_TagString: TokenTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
