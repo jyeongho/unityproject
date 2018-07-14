@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour {
             string minutes = ((int)t / 60).ToString();
             string seconds = (t % 60).ToString("f2");
             limitTimer.text = minutes + ":" + seconds;
-            if (minutes == "0")
+            if (minutes == "1")
             {
                 limitTimer.text = "Time over!";
                 button.enabled = true;
