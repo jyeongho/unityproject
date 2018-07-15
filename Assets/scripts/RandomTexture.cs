@@ -17,11 +17,11 @@ public class RandomTexture : MonoBehaviour {
 
         foreach(GameObject item in tokens)
         {
-            Debug.Log(item.name);
-            Debug.Log(item.name.Substring(0,1));
+        //    Debug.Log(item.name);
+            //Debug.Log(item.name.Substring(0,1));
         }
 
-        Debug.Log("-----------------------");
+        //Debug.Log("-----------------------");
 
         currentObject = Instantiate(tokens[index]);
 

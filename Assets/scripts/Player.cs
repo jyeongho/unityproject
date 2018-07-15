@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
-    
+public class Player : MonoBehaviour
+{
     private Rigidbody rb1;
     private Rigidbody rb2;
     private Rigidbody rb3;
@@ -17,15 +17,20 @@ public class Player : MonoBehaviour {
     public GameObject cameraplayer2;
     public GameObject cameraplayer3;
     public GameObject cameraplayer4;
-    float speed1;
-    float speed2;
-    float speed3;
-    float speed4;
+    public float speed;
     private GameObject currentcamera;
     private bool button;
-    private int i = 0;
+    public int i = 0;
     private bool isMove;
     private int n = 0;
+    private Ray ray;
+    private RaycastHit hit, h;
+    private Vector3 dis;
+    private int select = 0;
+    private int rayCount = 0;
+
+
+    private Vector3 temp = new Vector3();
 
     private void Awake()
     {
@@ -42,10 +47,6 @@ public class Player : MonoBehaviour {
         rb3.freezeRotation = true;
         rb4 = Player4.GetComponent<Rigidbody>();
         rb4.freezeRotation = true;
-        speed1 = 0;
-        speed2 = 0;
-        speed3 = 0;
-        speed4 = 0;
         currentcamera = defaultcamera;
         button = false;
     }
@@ -57,34 +58,24 @@ public class Player : MonoBehaviour {
             if (Input.GetKeyDown("r"))
             {
                 switchToPlayer(cameraplayer1);
-                speed1 = 10;
-                speed2 = 0;
-                speed3 = 0;
-                speed4 = 0;
+                select = 1;
             }
             if (Input.GetKeyDown("b"))
             {
                 switchToPlayer(cameraplayer2);
-                speed1 = 0;
-                speed2 = 10;
-                speed3 = 0;
-                speed4 = 0;
+                select = 2;
             }
             if (Input.GetKeyDown("y"))
             {
                 switchToPlayer(cameraplayer3);
-                speed1 = 0;
-                speed2 = 0;
-                speed3 = 10;
-                speed4 = 0;
+                select = 3;
             }
             if (Input.GetKeyDown("g"))
             {
                 switchToPlayer(cameraplayer4);
-                speed1 = 0;
-                speed2 = 0;
-                speed3 = 0;
-                speed4 = 10;
+                select = 4;
+
+                Debug.Log("Green Key");
             }
         }
 
@@ -102,6 +93,8 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) == true && !isMove)
         {
+            Debug.Log("UpArrow");
+
             i = 3;
             isMove = true;
             button = false;
@@ -115,58 +108,91 @@ public class Player : MonoBehaviour {
 
         if (isMove)
         {
-            switch (i)
+            switch (select)
             {
                 case 1:
-                    transform.Translate(Vector3.left * speed1 * Time.deltaTime);
-                    transform.Translate(Vector3.left * speed2 * Time.deltaTime);
-                    transform.Translate(Vector3.left * speed3 * Time.deltaTime);
-                    transform.Translate(Vector3.left * speed4 * Time.deltaTime);
+                    MovePlayer(rb1, i);
                     break;
                 case 2:
-                    transform.Translate(-Vector3.left * speed1 * Time.deltaTime);
-                    transform.Translate(-Vector3.left * speed2 * Time.deltaTime);
-                    transform.Translate(-Vector3.left * speed3 * Time.deltaTime);
-                    transform.Translate(-Vector3.left * speed4 * Time.deltaTime);
+                    MovePlayer(rb2, i);
                     break;
                 case 3:
-                    transform.Translate(Vector3.forward * speed1 * Time.deltaTime);
-                    transform.Translate(Vector3.forward * speed2 * Time.deltaTime);
-                    transform.Translate(Vector3.forward * speed3 * Time.deltaTime);
-                    transform.Translate(Vector3.forward * speed4 * Time.deltaTime);
+                    MovePlayer(rb3, i);
                     break;
                 case 4:
-                    transform.Translate(-Vector3.forward * speed1 * Time.deltaTime);
-                    transform.Translate(-Vector3.forward * speed2 * Time.deltaTime);
-                    transform.Translate(-Vector3.forward * speed3 * Time.deltaTime);
-                    transform.Translate(-Vector3.forward * speed4 * Time.deltaTime);
+                    MovePlayer(rb4, i);
                     break;
             }
         }
+    }
 
+    void MovePlayer(Rigidbody rb, int color)
+    {
+        switch (color)
+        {
+            case 1:
+                if (rayCount == 0)
+                {
+                    ray = new Ray(rb.transform.position, Vector3.left);
+                    Physics.Raycast(ray, out h);
+                    rayCount++;
+                    temp = rb.transform.position;
+                    dis = new Vector3(Mathf.Floor(h.distance), 0, 0);
+                }
+                break;
+            case 2:
+                if (rayCount == 0)
+                {
+                    ray = new Ray(rb.transform.position, -Vector3.left);
+                    Physics.Raycast(ray, out h);
+                    rayCount++;
+                    temp = rb.transform.position;
+                    dis = new Vector3(-Mathf.Floor(h.distance), 0, 0);
+                }
+                break;
+            case 3:
+                if (rayCount == 0)
+                {
+                    ray = new Ray(rb.transform.position, Vector3.forward);
+                    Physics.Raycast(ray, out h);
+                    rayCount++;
+                    temp = rb.transform.position;
+                    dis = new Vector3(0, 0, -Mathf.Floor(h.distance));
+                }
+                break;
+            case 4:
+                if (rayCount == 0)
+                {
+                    ray = new Ray(rb.transform.position, -Vector3.forward);
+                    Physics.Raycast(ray, out h);
+                    rayCount++;
+                    temp = rb.transform.position;
+                    dis = new Vector3(0, 0, Mathf.Floor(h.distance));
+                }
+                break;
+        }
+
+        if (rb.transform.position != temp - dis)
+            rb.transform.position = Vector3.MoveTowards(rb.transform.position, temp - dis, speed * Time.deltaTime);
+        else
+        {
+            isMove = false;
+            button = true;
+            n += 1;
+            i = 0;
+            rayCount = 0;
+        }
     }
 
     void switchToPlayer(GameObject camera)
     {
-        currentcamera = camera;
+        currentcamera = defaultcamera;
     }
 
     void FixedUpdate()
     {
-        /*
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
-        rb1.AddForce(movement * speed1);
-        rb2.AddForce(movement * speed2);
-        rb3.AddForce(movement * speed3);
-        rb4.AddForce(movement * speed4);
-        */
         defaultcamera.transform.position = currentcamera.transform.position;
         defaultcamera.transform.rotation = currentcamera.transform.rotation;
-
     }
 
 
@@ -175,99 +201,8 @@ public class Player : MonoBehaviour {
         button = true;
     }
 
-    void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(i.ToString());
-        if (i > 0) {
-            if ((i < 3) && (other.transform.tag == "VerticalWalls"))
-        {
-                //move to center
-                if (i == 1)
-                {
-                    transform.position = Vector3.MoveTowards
-                        (transform.position,
-                        transform.position + new Vector3(0.135f, 0, 0),
-                        speed1 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0.135f, 0, 0),
-    speed2 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0.135f, 0, 0),
-    speed3 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0.135f, 0, 0),
-    speed4 * Time.deltaTime);
-                }
-                else
-                {
-                    transform.position = Vector3.MoveTowards
-                        (transform.position,
-                        transform.position + new Vector3(-0.135f, 0, 0),
-                        speed1 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(-0.135f, 0, 0),
-    speed2 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(-0.135f, 0, 0),
-    speed3 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(-0.135f, 0, 0),
-    speed4 * Time.deltaTime);
-                }
-            }
-            if ((i >= 3) && (other.transform.tag == "HorizontalWalls"))
-            {
-                //move to center
-                if (i == 3)
-                {
-                    transform.position = Vector3.MoveTowards
-                        (transform.position,
-                        transform.position + new Vector3(0, 0, -0.045f),
-                        speed1 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0, 0, -0.045f),
-    speed2 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0, 0, -0.045f),
-    speed3 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0, 0, -0.045f),
-    speed4 * Time.deltaTime);
-                }
-                else
-                {
-                    transform.position = Vector3.MoveTowards
-                        (transform.position,
-                        transform.position + new Vector3(0, 0, 0.045f),
-                        speed1 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0, 0, 0.045f),
-    speed2 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0, 0, 0.045f),
-    speed3 * Time.deltaTime);
-                    transform.position = Vector3.MoveTowards
-    (transform.position,
-    transform.position + new Vector3(0, 0, 0.045f),
-    speed4 * Time.deltaTime);
-                }
-            }
-        }
-
-        button = true;
-        isMove = false;
-        n += 1;
-        i = 0;
+        Debug.Log("On Trigger Enter!!!");
     }
 }
