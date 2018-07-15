@@ -28,7 +28,8 @@ public class Player : MonoBehaviour
     private Vector3 dis;
     private int select = 0;
     private int rayCount = 0;
-
+    private RandomTexture randomObject;
+    private string randomTokenString;
 
     private Vector3 temp = new Vector3();
 
@@ -49,6 +50,12 @@ public class Player : MonoBehaviour
         rb4.freezeRotation = true;
         currentcamera = defaultcamera;
         button = false;
+        randomObject = GameObject.Find("RandomToken").GetComponent<RandomTexture>();
+
+        randomTokenString = randomObject.randomToken;
+
+        Debug.Log("Random index is " + randomTokenString);
+        
     }
 
     void Update()
@@ -78,6 +85,8 @@ public class Player : MonoBehaviour
                 Debug.Log("Green Key");
             }
         }
+
+        /* (i = 1, Left), (i = 2, Right), (i = 3, UpArrow), (i = 4, DownArrow) */
 
         if (Input.GetKeyDown(KeyCode.LeftArrow) == true && !isMove)
         {
@@ -126,6 +135,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    /* (i = 1, Left), (i = 2, Right), (i = 3, UpArrow), (i = 4, DownArrow) */
     void MovePlayer(Rigidbody rb, int color)
     {
         switch (color)
@@ -138,6 +148,16 @@ public class Player : MonoBehaviour
                     rayCount++;
                     temp = rb.transform.position;
                     dis = new Vector3(Mathf.Floor(h.distance), 0, 0);
+                    Debug.Log("Case 1, hit distnace : " + h.distance);
+                    Debug.Log("case1    , hit collider name is : " + h.collider.name);
+                    Debug.Log("case1, hit collider tag is : " + h.collider.tag);
+                    if (h.collider.gameObject.CompareTag("TokenTag"))
+                    {
+                        dis = dis + new Vector3(1.0f, 0.0f, 0.0f);
+                        Debug.Log("case1 tag is tokenTag");
+                        //h.collider.gameObject.SetActive(false);
+                    }
+
                 }
                 break;
             case 2:
@@ -148,6 +168,18 @@ public class Player : MonoBehaviour
                     rayCount++;
                     temp = rb.transform.position;
                     dis = new Vector3(-Mathf.Floor(h.distance), 0, 0);
+                    Debug.Log("Case 2, hit distnace : " + h.distance);
+                    Debug.Log("case2, hit collider name is : " + h.collider.name);
+                    Debug.Log("case2, hit collider tag is : " + h.collider.tag);
+                    Debug.Log("case2 dis vector is " + dis.x + "/" + dis.y + "/" + dis.z + "/");
+
+                    if (h.collider.gameObject.CompareTag("TokenTag"))
+                    {
+                        dis = dis - new Vector3(1.0f, 0.0f, 0.0f);
+                        Debug.Log("case2 tag is tokenTag" + dis.x + "/" + dis.y + "/" + dis.z + "/");
+                    }
+
+
                 }
                 break;
             case 3:
@@ -158,6 +190,15 @@ public class Player : MonoBehaviour
                     rayCount++;
                     temp = rb.transform.position;
                     dis = new Vector3(0, 0, -Mathf.Floor(h.distance));
+                    Debug.Log("Case 3, hit distnace : " + h.distance);
+                    Debug.Log("case3, hit collider name is : " + h.collider.name);
+                    Debug.Log("case3, hit collider tag is : " + h.collider.tag);
+                    if (h.collider.gameObject.CompareTag("TokenTag"))
+                    {
+                        dis = dis - new Vector3(0.0f, 0.0f, 1.0f);
+                        Debug.Log("case3 tag is tokenTag"+ dis.x +"/" + dis.y +"/"+dis.z+"/");
+                    }
+
                 }
                 break;
             case 4:
@@ -168,6 +209,15 @@ public class Player : MonoBehaviour
                     rayCount++;
                     temp = rb.transform.position;
                     dis = new Vector3(0, 0, Mathf.Floor(h.distance));
+                    Debug.Log("Case 4, hit distnace : " + h.distance);
+                    Debug.Log("case4, hit collider name is : " + h.collider.name);
+                    Debug.Log("case4, hit collider tag is : " + h.collider.tag);
+                    if (h.collider.gameObject.CompareTag("TokenTag"))
+                    {
+                        dis = dis + new Vector3(0.0f, 0.0f, 1.0f);
+                        Debug.Log("case4 tag is tokenTag");
+                    }
+
                 }
                 break;
         }
@@ -201,8 +251,12 @@ public class Player : MonoBehaviour
         button = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         Debug.Log("On Trigger Enter!!!");
+        Debug.Log("On Trigger Enter!!!~~~");
+        Debug.Log("On Trigger Enter!!!@#@#");
     }
+
+
 }
