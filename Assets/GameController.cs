@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
     public Text limitTimer;
     private float startTime;
     public Button button;
+    public int condition=0;
     
     private void Awake()
     {
@@ -20,24 +21,35 @@ public class GameController : MonoBehaviour {
     }
     public void GetInput(string str)
     {
-        if (text.text == "Shortest path")
+        int j;
+        if (Int32.TryParse(str, out j) && str.IndexOf("0") != 0 && Int32.Parse(str) > 0)
         {
-            text.text = str;
-            startTime = Time.time;
-        } else
-        {
-            if (Int32.Parse(text.text) > Int32.Parse(str))
+            Debug.Log("shortestinput = " + text.text);
+            if (text.text == "Path")
             {
                 text.text = str;
                 startTime = Time.time;
+                condition = Int32.Parse(str);
             }
+            else
+            {
+                if (Int32.Parse(text.text) > Int32.Parse(str))
+                {
+                    text.text = str;
+                    condition = Int32.Parse(text.text);
+                    startTime = Time.time;
+                }
+            }
+            input.text = "";
+        } else
+        {
+            input.text = "";
         }
-        input.text = "";
     }
 
     private void Update()
     {
-        if (text.text != "Shortest path")
+        if (text.text != "Path")
         {
             float t = Time.time - startTime;
 

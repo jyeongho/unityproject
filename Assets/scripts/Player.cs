@@ -1,6 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -12,11 +14,6 @@ public class Player : MonoBehaviour
     public GameObject Player2;
     public GameObject Player3;
     public GameObject Player4;
-    public GameObject defaultcamera;
-    public GameObject cameraplayer1;
-    public GameObject cameraplayer2;
-    public GameObject cameraplayer3;
-    public GameObject cameraplayer4;
     public float speed;
     public GameObject CountText;
     private GameObject currentcamera;
@@ -32,6 +29,9 @@ public class Player : MonoBehaviour
     private RandomTexture rt;
     private Token mainToken;
     private Count count;
+
+    private GameController gameController;
+    private int condition;
 
     private Vector3 temp = new Vector3();
 
@@ -50,13 +50,13 @@ public class Player : MonoBehaviour
         rb3.freezeRotation = true;
         rb4 = Player4.GetComponent<Rigidbody>();
         rb4.freezeRotation = true;
-        currentcamera = defaultcamera;
         button = false;
 
         rt = GameObject.Find("RandomToken").GetComponent<RandomTexture>();
-        mainToken = rt.mainToken;
-        CountText = GameObject.Find("CountText");
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
         count = GameObject.Find("CountText").GetComponent<Count>();
+        CountText = GameObject.Find("CountText");
+        mainToken = rt.mainToken;
     }
 
     void Update()
@@ -65,22 +65,18 @@ public class Player : MonoBehaviour
         {
             if (Input.GetKeyDown("r"))
             {
-                switchToPlayer(cameraplayer1);
                 select = 1;
             }
             if (Input.GetKeyDown("b"))
             {
-                switchToPlayer(cameraplayer2);
                 select = 2;
             }
             if (Input.GetKeyDown("y"))
             {
-                switchToPlayer(cameraplayer3);
                 select = 3;
             }
             if (Input.GetKeyDown("g"))
             {
-                switchToPlayer(cameraplayer4);
                 select = 4;
             }
         }
@@ -175,8 +171,6 @@ public class Player : MonoBehaviour
                         dis = dis - new Vector3(1.0f, 0.0f, 0.0f);
                         //Debug.Log("case2 tag is tokenTag" + dis.x + "/" + dis.y + "/" + dis.z + "/");
                     }
-
-
                 }
                 break;
             case 3:
@@ -227,36 +221,33 @@ public class Player : MonoBehaviour
             i = 0;
             rayCount = 0;
             //TODO: do not count when it is not moving
-            CountText.SendMessage("CountUp");
+            count.SendMessage("CountUp");
             //Game Over (Times up / count exceed)
-            if (count.n > 10)
+            condition = gameController.condition;
+            Debug.Log(condition.ToString());
+            if (count.n == condition)
             {
-                Debug.Log("You failed...");
-            }
-            else if ((mainToken.getColor() == 0) || (mainToken.getColor() == select))
-            {
-                float distance = Vector3.Distance(
-                    rb.transform.position,
-                    new Vector3(mainToken.getXaxis(), 0.3f, mainToken.getZaxis()));
-                if (distance < 0.5)
-                { //TODO: add condition of counrt
-                    Debug.Log("You success!!");
+                if ((mainToken.getColor() == 0) || (mainToken.getColor() == select))
+                {
+                    float distance = Vector3.Distance(
+                        rb.transform.position,
+                        new Vector3(mainToken.getXaxis(), 0.3f, mainToken.getZaxis()));
+                    if (distance < 0.5)
+                    { //TODO: add condition of counrt
+                        Debug.Log("You success!!");
+                    }
+                    else
+                    {
+                        Debug.Log("You failed...");
+                    }
+                }
+                else
+                {
+                    Debug.Log("You failed...");
                 }
             }
         }
     }
-
-    void switchToPlayer(GameObject camera)
-    {
-        currentcamera = defaultcamera;
-    }
-
-    void FixedUpdate()
-    {
-        defaultcamera.transform.position = currentcamera.transform.position;
-        defaultcamera.transform.rotation = currentcamera.transform.rotation;
-    }
-
 
     public void buttonOn()
     {
