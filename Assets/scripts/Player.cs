@@ -18,18 +18,18 @@ public class Player : MonoBehaviour
     public GameObject cameraplayer3;
     public GameObject cameraplayer4;
     public float speed;
+    public GameObject CountText;
     private GameObject currentcamera;
     private bool button;
     public int i = 0;
     private bool isMove;
-    private int n = 0;
     private Ray ray;
     private RaycastHit hit, h;
     private Vector3 dis;
     private int select = 0;
     private int rayCount = 0;
-    private RandomTexture randomObject;
-    private string randomTokenString;
+    private RandomTexture rt;
+    private Token mainToken;
 
     private Vector3 temp = new Vector3();
 
@@ -50,12 +50,9 @@ public class Player : MonoBehaviour
         rb4.freezeRotation = true;
         currentcamera = defaultcamera;
         button = false;
-        randomObject = GameObject.Find("RandomToken").GetComponent<RandomTexture>();
-
-        randomTokenString = randomObject.randomToken;
-
-        Debug.Log("Random index is " + randomTokenString);
-        
+        rt = GameObject.Find("RandomToken").GetComponent<RandomTexture>();
+        mainToken = rt.mainToken;
+        CountText = GameObject.Find("CountText");
     }
 
     void Update()
@@ -81,8 +78,6 @@ public class Player : MonoBehaviour
             {
                 switchToPlayer(cameraplayer4);
                 select = 4;
-
-                Debug.Log("Green Key");
             }
         }
 
@@ -102,8 +97,6 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) == true && !isMove)
         {
-            Debug.Log("UpArrow");
-
             i = 3;
             isMove = true;
             button = false;
@@ -136,9 +129,9 @@ public class Player : MonoBehaviour
     }
 
     /* (i = 1, Left), (i = 2, Right), (i = 3, UpArrow), (i = 4, DownArrow) */
-    void MovePlayer(Rigidbody rb, int color)
+    void MovePlayer(Rigidbody rb, int direction)
     {
-        switch (color)
+        switch (direction)
         {
             case 1:
                 if (rayCount == 0)
@@ -148,13 +141,13 @@ public class Player : MonoBehaviour
                     rayCount++;
                     temp = rb.transform.position;
                     dis = new Vector3(Mathf.Floor(h.distance), 0, 0);
-                    Debug.Log("Case 1, hit distnace : " + h.distance);
-                    Debug.Log("case1    , hit collider name is : " + h.collider.name);
-                    Debug.Log("case1, hit collider tag is : " + h.collider.tag);
+                    //Debug.Log("Case 1, hit distnace : " + h.distance);
+                    //Debug.Log("case1    , hit collider name is : " + h.collider.name);
+                    //Debug.Log("case1, hit collider tag is : " + h.collider.tag);
                     if (h.collider.gameObject.CompareTag("TokenTag"))
                     {
                         dis = dis + new Vector3(1.0f, 0.0f, 0.0f);
-                        Debug.Log("case1 tag is tokenTag");
+                        //Debug.Log("case1 tag is tokenTag");
                         //h.collider.gameObject.SetActive(false);
                     }
 
@@ -168,15 +161,15 @@ public class Player : MonoBehaviour
                     rayCount++;
                     temp = rb.transform.position;
                     dis = new Vector3(-Mathf.Floor(h.distance), 0, 0);
-                    Debug.Log("Case 2, hit distnace : " + h.distance);
-                    Debug.Log("case2, hit collider name is : " + h.collider.name);
-                    Debug.Log("case2, hit collider tag is : " + h.collider.tag);
-                    Debug.Log("case2 dis vector is " + dis.x + "/" + dis.y + "/" + dis.z + "/");
+                    //Debug.Log("Case 2, hit distnace : " + h.distance);
+                    //Debug.Log("case2, hit collider name is : " + h.collider.name);
+                    //Debug.Log("case2, hit collider tag is : " + h.collider.tag);
+                    //Debug.Log("case2 dis vector is " + dis.x + "/" + dis.y + "/" + dis.z + "/");
 
                     if (h.collider.gameObject.CompareTag("TokenTag"))
                     {
                         dis = dis - new Vector3(1.0f, 0.0f, 0.0f);
-                        Debug.Log("case2 tag is tokenTag" + dis.x + "/" + dis.y + "/" + dis.z + "/");
+                        //Debug.Log("case2 tag is tokenTag" + dis.x + "/" + dis.y + "/" + dis.z + "/");
                     }
 
 
@@ -190,13 +183,13 @@ public class Player : MonoBehaviour
                     rayCount++;
                     temp = rb.transform.position;
                     dis = new Vector3(0, 0, -Mathf.Floor(h.distance));
-                    Debug.Log("Case 3, hit distnace : " + h.distance);
-                    Debug.Log("case3, hit collider name is : " + h.collider.name);
-                    Debug.Log("case3, hit collider tag is : " + h.collider.tag);
+                    //Debug.Log("Case 3, hit distnace : " + h.distance);
+                    //Debug.Log("case3, hit collider name is : " + h.collider.name);
+                    //Debug.Log("case3, hit collider tag is : " + h.collider.tag);
                     if (h.collider.gameObject.CompareTag("TokenTag"))
                     {
                         dis = dis - new Vector3(0.0f, 0.0f, 1.0f);
-                        Debug.Log("case3 tag is tokenTag"+ dis.x +"/" + dis.y +"/"+dis.z+"/");
+                        //Debug.Log("case3 tag is tokenTag"+ dis.x +"/" + dis.y +"/"+dis.z+"/");
                     }
 
                 }
@@ -209,15 +202,14 @@ public class Player : MonoBehaviour
                     rayCount++;
                     temp = rb.transform.position;
                     dis = new Vector3(0, 0, Mathf.Floor(h.distance));
-                    Debug.Log("Case 4, hit distnace : " + h.distance);
-                    Debug.Log("case4, hit collider name is : " + h.collider.name);
-                    Debug.Log("case4, hit collider tag is : " + h.collider.tag);
+                    //Debug.Log("Case 4, hit distnace : " + h.distance);
+                    //Debug.Log("case4, hit collider name is : " + h.collider.name);
+                    //Debug.Log("case4, hit collider tag is : " + h.collider.tag);
                     if (h.collider.gameObject.CompareTag("TokenTag"))
                     {
                         dis = dis + new Vector3(0.0f, 0.0f, 1.0f);
-                        Debug.Log("case4 tag is tokenTag");
+                        //Debug.Log("case4 tag is tokenTag");
                     }
-
                 }
                 break;
         }
@@ -228,9 +220,23 @@ public class Player : MonoBehaviour
         {
             isMove = false;
             button = true;
-            n += 1;
             i = 0;
             rayCount = 0;
+            //TODO: do not count when it is not moving
+            CountText.SendMessage("CountUp");
+            Debug.Log("Box hit?");
+            Debug.Log(mainToken.getColor().ToString() + " mainTokenColor");
+            Debug.Log(select.ToString() + " box color");
+            if ((mainToken.getColor() == 0) || (mainToken.getColor() == select))
+            {
+                float distance = Vector3.Distance(
+                    rb.transform.position,
+                    new Vector3(mainToken.getXaxis(), 0.3f, mainToken.getZaxis()));
+                if (distance < 0.5)
+                { //TODO: add condition of count
+                    Debug.Log("You success!!");
+                }
+            }
         }
     }
 
