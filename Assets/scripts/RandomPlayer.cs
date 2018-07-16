@@ -27,8 +27,8 @@ public class RandomPlayer : MonoBehaviour {
             ||(Physics.Raycast(ray)));
 
             Debug.Log("spawn");
-            Debug.Log(spawnPoint.x);
-            Debug.Log(spawnPoint.z);
+            Debug.Log("spawn x point is " + spawnPoint.x);
+            Debug.Log("spawn z point is " + spawnPoint.z);
             player.transform.position = spawnPoint;
         }
     }
