@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     private GameController gameController;
     private int condition;
 
+    public InputField inputField;
+
     private Vector3 temp = new Vector3();
 
     private void Awake()
@@ -252,6 +254,7 @@ public class Player : MonoBehaviour
     public void buttonOn()
     {
         button = true;
+        inputField.enabled = false;
     }
 
     void OnTriggerEnter(Collider other)

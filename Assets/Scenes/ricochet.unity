@@ -472,14 +472,10 @@ MonoBehaviour:
   Player2: {fileID: 538885719}
   Player3: {fileID: 1454176562}
   Player4: {fileID: 1081189365}
-  defaultcamera: {fileID: 534669902}
-  cameraplayer1: {fileID: 434922426}
-  cameraplayer2: {fileID: 745811236}
-  cameraplayer3: {fileID: 1242246416}
-  cameraplayer4: {fileID: 219821717}
   speed: 8
   CountText: {fileID: 0}
   i: 0
+  inputField: {fileID: 318579088}
 --- !u!4 &30715392
 Transform:
   m_ObjectHideFlags: 0
@@ -6623,6 +6619,7 @@ MonoBehaviour:
   text: {fileID: 1162530927}
   limitTimer: {fileID: 1802960927}
   button: {fileID: 276320093}
+  condition: 0
 --- !u!4 &605866953
 Transform:
   m_ObjectHideFlags: 0
@@ -16427,6 +16424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 304f15cad4ccdad4eaf0f12ee2d64d4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  n: 0
 --- !u!1 &1539808395
 GameObject:
   m_ObjectHideFlags: 0
