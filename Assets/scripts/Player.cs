@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -34,6 +35,16 @@ public class Player : MonoBehaviour
     private int condition;
 
     public InputField inputField;
+    public AudioClip MusicClip;
+    public AudioSource MusicSource;
+    public AudioClip MusicClip1;
+    public AudioSource MusicSource1;
+    public AudioSource MusicSource2;
+    public AudioClip MusicClip3;
+    public AudioSource MusicSource3;
+    public Image image;
+    public TextMeshProUGUI succestext;
+    public TextMeshProUGUI failtext;
 
     private Vector3 temp = new Vector3();
 
@@ -59,6 +70,9 @@ public class Player : MonoBehaviour
         count = GameObject.Find("CountText").GetComponent<Count>();
         CountText = GameObject.Find("CountText");
         mainToken = rt.mainToken;
+        MusicSource.clip = MusicClip;
+        MusicSource1.clip = MusicClip1;
+        MusicSource3.clip = MusicClip3;
     }
 
     void Update()
@@ -68,18 +82,26 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown("r"))
             {
                 select = 1;
+                image.color = Color.red;
+                MusicSource3.Play();
             }
             if (Input.GetKeyDown("b"))
             {
                 select = 2;
+                image.color = Color.blue;
+                MusicSource3.Play();
             }
             if (Input.GetKeyDown("y"))
             {
                 select = 3;
+                image.color = Color.yellow;
+                MusicSource3.Play();
             }
             if (Input.GetKeyDown("g"))
             {
                 select = 4;
+                image.color = Color.green;
+                MusicSource3.Play();
             }
         }
 
@@ -90,24 +112,28 @@ public class Player : MonoBehaviour
             i = 1;
             isMove = true;
             button = false;
+            MusicSource.Play();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) == true && !isMove)
         {
             i = 2;
             isMove = true;
             button = false;
+            MusicSource.Play();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) == true && !isMove)
         {
             i = 3;
             isMove = true;
             button = false;
+            MusicSource.Play();
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) == true && !isMove)
         {
             i = 4;
             isMove = true;
             button = false;
+            MusicSource.Play();
         }
 
         if (isMove)
@@ -237,15 +263,18 @@ public class Player : MonoBehaviour
                     if (distance < 0.5)
                     { //TODO: add condition of counrt
                         Debug.Log("You success!!");
+                        succestext.text = "SUCCESS";
                     }
                     else
                     {
                         Debug.Log("You failed...");
+                        failtext.text = "FAIL";
                     }
                 }
                 else
                 {
                     Debug.Log("You failed...");
+                    failtext.text = "FAIL";
                 }
             }
         }
@@ -255,6 +284,8 @@ public class Player : MonoBehaviour
     {
         button = true;
         inputField.enabled = false;
+        MusicSource1.Play();
+        MusicSource2.Pause();
     }
 
     void OnTriggerEnter(Collider other)

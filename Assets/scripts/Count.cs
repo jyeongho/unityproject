@@ -14,7 +14,7 @@ public class Count : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        CountText.text = "Count is :" + n;
+        CountText.text = "" + n;
 	}
 
     void CountUp()

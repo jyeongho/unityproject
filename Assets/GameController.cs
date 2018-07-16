@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour {
     private float startTime;
     public Button button;
     public int condition=0;
+    public Text gameovertext;
+    public AudioSource audioSource;
     
     private void Awake()
     {
@@ -58,8 +60,10 @@ public class GameController : MonoBehaviour {
             limitTimer.text = minutes + ":" + seconds;
             if (minutes == "0")
             {
-                limitTimer.text = "Time over!";
                 button.enabled = true;
+                limitTimer.text = "";
+                gameovertext.text = "Time over!";
+                audioSource.volume = 1;
             }
         }
     }
