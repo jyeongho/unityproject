@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class Count : MonoBehaviour {
-    private int n = 0;
+    public int n = 0;
     Text CountText;
 
     // Use this for initialization

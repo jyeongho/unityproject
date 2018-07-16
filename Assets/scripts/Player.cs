@@ -24,12 +24,14 @@ public class Player : MonoBehaviour
     public int i = 0;
     private bool isMove;
     private Ray ray;
-    private RaycastHit hit, h;
+    private RaycastHit h;
     private Vector3 dis;
     private int select = 0;
     private int rayCount = 0;
+
     private RandomTexture rt;
     private Token mainToken;
+    private Count count;
 
     private Vector3 temp = new Vector3();
 
@@ -50,9 +52,11 @@ public class Player : MonoBehaviour
         rb4.freezeRotation = true;
         currentcamera = defaultcamera;
         button = false;
+
         rt = GameObject.Find("RandomToken").GetComponent<RandomTexture>();
         mainToken = rt.mainToken;
         CountText = GameObject.Find("CountText");
+        count = GameObject.Find("CountText").GetComponent<Count>();
     }
 
     void Update()
@@ -224,16 +228,18 @@ public class Player : MonoBehaviour
             rayCount = 0;
             //TODO: do not count when it is not moving
             CountText.SendMessage("CountUp");
-            Debug.Log("Box hit?");
-            Debug.Log(mainToken.getColor().ToString() + " mainTokenColor");
-            Debug.Log(select.ToString() + " box color");
-            if ((mainToken.getColor() == 0) || (mainToken.getColor() == select))
+            //Game Over (Times up / count exceed)
+            if (count.n > 10)
+            {
+                Debug.Log("You failed...");
+            }
+            else if ((mainToken.getColor() == 0) || (mainToken.getColor() == select))
             {
                 float distance = Vector3.Distance(
                     rb.transform.position,
                     new Vector3(mainToken.getXaxis(), 0.3f, mainToken.getZaxis()));
                 if (distance < 0.5)
-                { //TODO: add condition of count
+                { //TODO: add condition of counrt
                     Debug.Log("You success!!");
                 }
             }
