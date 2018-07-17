@@ -5,13 +5,28 @@ using UnityEngine.SceneManagement;
 
 public class Mainmenu : MonoBehaviour {
 
-	public void PlayGame()
+    public AudioClip playclip;
+    public AudioSource playsource;
+    public AudioClip quitclip;
+    public AudioSource quitsource;
+
+    private void Start()
     {
+        playsource.clip = playclip;
+        quitsource.clip = quitclip;
+    }
+
+    public void PlayGame()
+    {
+        playsource.Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+       
     }
 
     public void QuitGame()
     {
+        quitsource.Play();
         Application.Quit();
+
     }
 }

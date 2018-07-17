@@ -43,8 +43,13 @@ public class Player : MonoBehaviour
     public AudioClip MusicClip3;
     public AudioSource MusicSource3;
     public Image image;
+    public Image tokenImage;
     public TextMeshProUGUI succestext;
     public TextMeshProUGUI failtext;
+    public AudioClip successclip;
+    public AudioSource successSource;
+    public AudioClip failclip;
+    public AudioSource failSource;
 
     private Vector3 temp = new Vector3();
 
@@ -70,9 +75,13 @@ public class Player : MonoBehaviour
         count = GameObject.Find("CountText").GetComponent<Count>();
         CountText = GameObject.Find("CountText");
         mainToken = rt.mainToken;
+        tokenImage.material = Resources.Load("UI/" + mainToken.getName(), typeof(Material)) as Material;
+
         MusicSource.clip = MusicClip;
         MusicSource1.clip = MusicClip1;
         MusicSource3.clip = MusicClip3;
+        successSource.clip = successclip;
+        failSource.clip = failclip;
     }
 
     void Update()
@@ -264,17 +273,20 @@ public class Player : MonoBehaviour
                     { //TODO: add condition of counrt
                         Debug.Log("You success!!");
                         succestext.text = "SUCCESS";
+                        successSource.Play();
                     }
                     else
                     {
                         Debug.Log("You failed...");
                         failtext.text = "FAIL";
+                        failSource.Play();
                     }
                 }
                 else
                 {
                     Debug.Log("You failed...");
                     failtext.text = "FAIL";
+                    failSource.Play();
                 }
             }
         }
