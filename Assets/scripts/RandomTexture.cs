@@ -67,7 +67,7 @@ public class RandomTexture : MonoBehaviour {
         {
             select = 2;
         }
-        else if (randomToken.Contains("Yellow"))
+        else if (randomToken.Contains("Orange"))
         {
             select = 3;
         }

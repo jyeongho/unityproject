@@ -56,9 +56,9 @@ public class GameController : MonoBehaviour {
             float t = Time.time - startTime;
 
             string minutes = ((int)t / 60).ToString();
-            string seconds = (t % 60).ToString("f2");
+            string seconds = (t % 60).ToString("f0");
             limitTimer.text = minutes + ":" + seconds;
-            if (minutes == "1")
+            if (Int32.Parse(seconds) >= 10 || Int32.Parse(minutes)>=1)
             {
                 button.enabled = true;
                 limitTimer.text = "";

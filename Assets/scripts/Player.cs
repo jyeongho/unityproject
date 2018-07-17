@@ -100,9 +100,10 @@ public class Player : MonoBehaviour
                 image.color = Color.blue;
                 MusicSource3.Play();
             }
-            if (Input.GetKeyDown("y"))
+            if (Input.GetKeyDown("o"))
             {
                 select = 3;
+                //orange?
                 image.color = Color.yellow;
                 MusicSource3.Play();
             }
