@@ -46,6 +46,8 @@ public class Player : MonoBehaviour
     public Image tokenImage;
     public TextMeshProUGUI succestext;
     public TextMeshProUGUI failtext;
+    public TextMeshProUGUI succestext2;
+    public TextMeshProUGUI failtext2;
     public AudioClip successclip;
     public AudioSource successSource;
     public AudioClip failclip;
@@ -277,7 +279,7 @@ public class Player : MonoBehaviour
                     if (distance < 0.5)
                     { //TODO: add condition of counrt
                         Debug.Log("You success!!");
-                        succestext.text = "SUCCESS";
+                        succestext2.text = "SUCCESS";
                         successSource.Play();
                         Debug.Log("first");
                         GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
@@ -287,7 +289,7 @@ public class Player : MonoBehaviour
                     else
                     {
                         Debug.Log("You failed...");
-                        failtext.text = "FAIL";
+                        failtext2.text = "FAIL";
                         failSource.Play();
                         Debug.Log("second");
                         GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
@@ -298,7 +300,7 @@ public class Player : MonoBehaviour
                 else
                 {
                     Debug.Log("You failed...");
-                    failtext.text = "FAIL";
+                    failtext2.text = "FAIL";
                     failSource.Play();
                     Debug.Log("third");
                     GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
@@ -314,7 +316,7 @@ public class Player : MonoBehaviour
                 if (distance < 0.5)
                 { //TODO: add condition of counrt
                     Debug.Log("You failed...");
-                    failtext.text = "FAIL";
+                    failtext2.text = "FAIL";
                     failSource.Play();
                     Debug.Log("fourth");
                     GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
