@@ -60,6 +60,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
+                               .gameObject.SetActive(false);
         rb1 = Player1.GetComponent<Rigidbody>();
         rb1.freezeRotation = true;
         rb2 = Player2.GetComponent<Rigidbody>();
@@ -73,6 +75,7 @@ public class Player : MonoBehaviour
         rt = GameObject.Find("RandomToken").GetComponent<RandomTexture>();
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
         count = GameObject.Find("CountText").GetComponent<Count>();
+        count.n = 0;
         CountText = GameObject.Find("CountText");
         mainToken = rt.mainToken;
         tokenImage.material = Resources.Load("UI/" + mainToken.getName(), typeof(Material)) as Material;
@@ -100,7 +103,7 @@ public class Player : MonoBehaviour
                 image.color = Color.blue;
                 MusicSource3.Play();
             }
-            if (Input.GetKeyDown("o"))
+            if (Input.GetKeyDown("y"))
             {
                 select = 3;
                 //orange?
@@ -113,7 +116,7 @@ public class Player : MonoBehaviour
                 image.color = Color.green;
                 MusicSource3.Play();
             }
-        }
+        
 
         /* (i = 1, Left), (i = 2, Right), (i = 3, UpArrow), (i = 4, DownArrow) */
 
@@ -144,6 +147,7 @@ public class Player : MonoBehaviour
             isMove = true;
             button = false;
             MusicSource.Play();
+        }
         }
 
         if (isMove)
@@ -275,12 +279,20 @@ public class Player : MonoBehaviour
                         Debug.Log("You success!!");
                         succestext.text = "SUCCESS";
                         successSource.Play();
+                        Debug.Log("first");
+                        GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
+                            .gameObject.SetActive(true);
+                        Time.timeScale = 0;
                     }
                     else
                     {
                         Debug.Log("You failed...");
                         failtext.text = "FAIL";
                         failSource.Play();
+                        Debug.Log("second");
+                        GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
+                            .gameObject.SetActive(true);
+                        Time.timeScale = 0;
                     }
                 }
                 else
@@ -288,6 +300,26 @@ public class Player : MonoBehaviour
                     Debug.Log("You failed...");
                     failtext.text = "FAIL";
                     failSource.Play();
+                    Debug.Log("third");
+                    GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
+                            .gameObject.SetActive(true);
+                    Time.timeScale = 0;
+                }
+            }
+            else if(count.n < condition)
+            {
+                float distance = Vector3.Distance(
+                        rb.transform.position,
+                        new Vector3(mainToken.getXaxis(), 0.3f, mainToken.getZaxis()));
+                if (distance < 0.5)
+                { //TODO: add condition of counrt
+                    Debug.Log("You failed...");
+                    failtext.text = "FAIL";
+                    failSource.Play();
+                    Debug.Log("fourth");
+                    GameObject.Find("Game Over").transform.FindChild("GameOverPanel")
+                            .gameObject.SetActive(true);
+                    Time.timeScale = 0;
                 }
             }
         }
@@ -300,13 +332,4 @@ public class Player : MonoBehaviour
         MusicSource1.Play();
         MusicSource2.Pause();
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("On Trigger Enter!!!");
-        Debug.Log("On Trigger Enter!!!~~~");
-        Debug.Log("On Trigger Enter!!!@#@#");
-    }
-
-
 }

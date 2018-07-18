@@ -18,6 +18,7 @@ public class Reload : MonoBehaviour {
     public void reload()
     {
         MusicSource.Play();
+        Time.timeScale = 1f;
         Application.LoadLevel(Application.loadedLevel);
     }
 
